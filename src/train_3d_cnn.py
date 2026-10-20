@@ -100,6 +100,10 @@ with tf.device('/GPU:0'):
     print("🚀 Training Model on GPU...")
     model.fit(X_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, validation_data=(X_test, y_test))
 
-# ✅ SAVE MODEL
-model.save("brain_tumor_cnn.h5")
-print("✅ Model Saved Successfully!")
+# SAVE MODEL
+MODEL_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models")
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+MODEL_PATH = os.path.join(MODEL_DIR, "brain_tumor_cnn.h5")
+model.save(MODEL_PATH)
+print(f"Model saved successfully: {MODEL_PATH}")
