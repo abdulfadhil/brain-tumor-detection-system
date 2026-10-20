@@ -1,0 +1,60 @@
+# Python cache and build files
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+
+# Local Python environments
+.venv/
+venv/
+env/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+**/kaggle.json
+**/credentials.json
+**/*_secret*
+**/*_token*
+
+# Medical datasets and patient scans
+uploads/
+dataset/
+datasets/
+data/
+**/*.nii
+**/*.nii.gz
+**/*.dcm
+
+# Large model files
+# Keep trained models local unless a distribution method is approved
+*.h5
+*.hdf5
+*.keras
+*.pt
+*.pth
+*.onnx
+
+# Generated output and logs
+visualization_test.html
+*.log
+.DS_Store
+Thumbs.db
+
+# Local backups and experimental copies
+*.backup.py
+*.pre-validation.py
+*.backup.html
+
+# Archives
+*.zip
+
+# Demo awaiting third-party license verification
+demos/brain-mri-3d-visualization.html
+# Local backup templates
+templates/output.backup.html
