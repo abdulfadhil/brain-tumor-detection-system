@@ -33,7 +33,7 @@ The model output and mask-based measurements have not been clinically validated.
 
 ## How It Works
 
-1. **Upload:** Select the five required NIfTI files belonging to the same patient.
+1. **Upload:** Select the folder containing the five required NIfTI files for the same patient.
 2. **Validate:** The application checks the expected filenames and validates the image data.
 3. **Prepare the MRI:** The T1 volume is normalized, 64 slices are sampled, and each slice is resized to 128 × 128 pixels.
 4. **Run the model:** The prepared volume is passed to the trained CNN when a compatible model is available.
@@ -133,7 +133,7 @@ The application runs locally on your computer. This address is not a public webs
 
 ### 5. Try the Application
 
-Select the five required NIfTI files for one patient and follow the upload workflow.
+Select the folder containing the five required NIfTI files for one patient, then follow the upload workflow.
 
 Only use data you are authorized to process. Do not use real patient scans simply to create a demonstration.
 
