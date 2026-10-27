@@ -1,123 +1,192 @@
-# 3D CNN Brain Tumor Detection
 
-A Python project that explores brain MRI analysis using a 3D Convolutional Neural Network (3D CNN). It combines MRI file validation, interactive 3D visualization, and experimental model inference in a Flask web application.
+# Brain Tumor Detection Using 3D CNN
+
+An academic project developed in **April 2025** to explore brain MRI processing, 3D visualization, and experimental brain tumor detection using Python and a 3D Convolutional Neural Network (3D CNN).
+
+The project combines medical image validation, interactive 3D visualization, and experimental model inference in a local Flask web application.
 
 ## About the Project
 
-Brain MRI scans contain information across multiple image slices. Viewing and processing these scans requires tools that can read medical image files, prepare the data, and display it in a useful way.
+Brain MRI scans contain information across multiple image slices. Working with these scans requires tools to read medical image files, prepare the data, and visualize the images.
 
-I built this project to explore how Python, deep learning, and 3D visualization can work together in a single application. It brings several steps of the MRI analysis workflow into one place.
+This project brings several of these tasks together in one web application. Users can upload MRI-related NIfTI files, validate the inputs, explore an interactive 3D visualization, and view experimental model output when a compatible trained model is available.
 
-This is an educational and research project, not a clinically validated diagnostic system.
+The project demonstrates the integration of Python, deep learning, medical image processing, and web application development in an academic prototype.
 
 ## The Problem
 
-Working with 3D MRI data can involve several separate steps, including checking files, preparing image data, running a model, and viewing the results. These steps can be difficult to manage when using different tools.
+Working with 3D MRI data involves several steps, including:
+
+- Checking whether the required medical image files are available.
+- Reading and preparing volumetric MRI data.
+- Exploring brain images through visualization.
+- Running a compatible deep learning model.
+- Presenting the results through a usable interface.
+
+Managing these tasks across separate tools can make the workflow harder to follow.
 
 ## The Solution
 
-This project provides a web application where users can upload MRI files, check their validity, view an interactive 3D visualization, and examine experimental CNN output when a compatible trained model is available.
+The application provides a Flask-based interface for uploading MRI-related files, validating the inputs, viewing interactive 3D visualizations, and examining experimental 3D CNN output.
 
-The aim is to make the workflow easier to explore and understand through a simple web interface.
+It brings image-processing utilities and a deep learning inference workflow into one local application.
+
+The application is an educational prototype. Its output has not been clinically validated and must not be treated as a medical diagnosis.
 
 ## Key Features
 
-- **MRI file validation:** Checks the required files and their image data before processing.
-- **3D CNN inference:** Runs an experimental deep-learning model when a compatible model file is available.
-- **Interactive 3D visualization:** Displays MRI data and the supplied segmentation mask.
-- **Segmentation measurements:** Calculates voxel counts and an approximate volume from the supplied mask and voxel spacing.
-- **Web interface:** Brings file upload, visualization, and report viewing together in one application.
-- **Report options:** Provides options to download a PDF report, print the report, or analyze another scan.
-
-The model output and mask-based measurements have not been clinically validated.
+- **MRI file validation:** Checks the required input files before processing.
+- **Multiple MRI inputs:** Supports T1, T1ce, T2, FLAIR, and segmentation-mask files.
+- **3D visualization:** Provides interactive visualization of MRI data.
+- **Experimental 3D CNN inference:** Supports model inference when a compatible trained model is available.
+- **Input preparation:** Prepares MRI data for the expected model input format.
+- **Segmentation measurements:** Displays measurements derived from the supplied segmentation mask.
+- **Web interface:** Brings file upload, visualization, and results presentation together in one application.
 
 ## How It Works
 
-1. **Upload:** Select the folder containing the five required NIfTI files for the same patient.
-2. **Validate:** The application checks the expected filenames and validates the image data.
-3. **Prepare the MRI:** The T1 volume is normalized, 64 slices are sampled, and each slice is resized to 128 × 128 pixels.
-4. **Run the model:** The prepared volume is passed to the trained CNN when a compatible model is available.
-5. **View the visualization:** The application creates an interactive 3D view using the supplied MRI data and segmentation mask.
-6. **Review the report:** The results page displays the experimental model output and measurements calculated from the supplied mask.
+1. **Upload the files:** Select the five required NIfTI files associated with the same patient.
+2. **Validate the inputs:** The application checks the required files and their suitability for processing.
+3. **Prepare the MRI data:** The T1 image is normalized, 64 slices are sampled, and the slices are resized to 128 × 128 pixels.
+4. **Visualize the data:** The application provides an interactive 3D visualization.
+5. **Run experimental inference:** When a compatible trained model is available, the prepared input can be passed to the model.
+6. **Review the results:** The interface presents experimental model output and measurements calculated from the supplied segmentation mask.
 
-The model output is not a calibrated probability or a medical diagnosis. The supplied segmentation mask is not a segmentation generated by the CNN.
+The supplied segmentation mask is not generated by the CNN. The model's output score is experimental and must not be interpreted as a calibrated probability of disease.
 
-## Technology Stack
+## Screenshots
 
-| Technology | How it is used |
-|---|---|
-| Python | Main programming language |
-| TensorFlow | Loads and runs the CNN model |
-| Flask | Runs the web application and handles uploads |
-| NumPy | Performs numerical operations on image data |
-| NiBabel | Reads NIfTI medical image files |
-| Plotly | Creates interactive 3D visualizations |
-| scikit-learn | Supports machine-learning experiments |
-| OpenCV | Supports image resizing in experimental prediction code |
-| HTML and CSS | Build and style the web interface |
-
-## Required Input Files
-
-The application expects five NIfTI files for the same patient:
-
-- `<patient>_t1.nii.gz`
-- `<patient>_t1ce.nii.gz`
-- `<patient>_t2.nii.gz`
-- `<patient>_flair.nii.gz`
-- `<patient>_seg.nii.gz`
-
-The combined upload limit is 200 MB.
-
-Use files that you are authorized to access. Do not publish identifiable patient information, private scans, or medical datasets without the necessary permission.
-
-## Application Preview
-
-### Home Page
+### 1. Application Home Page
 
 ![Brain Tumor Detection application home page](screenshots/home-page.png)
 
-### 3D MRI Visualization and Analysis Report
+The home page provides the starting point for the MRI upload workflow.
 
-![Brain MRI visualization and experimental analysis report](screenshots/results-report.png)
+### 2. 3D MRI Visualization
+
+![Interactive 3D brain MRI visualization](screenshots/mri-visualization.png)
+
+The interactive visualization displays MRI data and the supplied segmentation mask.
+
+### 3. Analysis Report
+
+![Brain MRI analysis report](screenshots/results-report.png)
+
+The report displays experimental model output and measurements derived from the supplied segmentation mask. The displayed model score is not a validated medical prediction.
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python | Main programming language |
+| TensorFlow | Deep learning model inference |
+| Flask | Local web application and routing |
+| NumPy | Numerical operations and image-data preparation |
+| NiBabel | Reading NIfTI medical imaging files |
+| Plotly | Interactive visualization |
+| OpenCV | Image-processing utilities |
+| scikit-learn | Supporting machine learning utilities |
+| HTML and CSS | Web interface structure and styling |
+| Werkzeug | Flask-related request and file-handling utilities |
+
+These technologies reflect the project's dependencies and implementation. Not every dependency participates in every processing step.
+
+## Project Structure
+
+```text
+brain-tumor-detection-system/
+├── app.py
+├── requirements.txt
+├── README.md
+├── LICENSE
+├── models/
+│   └── README.md
+├── screenshots/
+│   ├── home-page.png
+│   ├── mri-visualization.png
+│   └── results-report.png
+├── src/
+│   ├── brain_3d_visualization.py
+│   ├── brain_tumor_training_experiment.py
+│   ├── mri_3d_visualization.py
+│   ├── mri_input_validation.py
+│   ├── multiclass_segmentation_experiment.py
+│   ├── train_3d_cnn.py
+│   ├── tumor_analysis_experiment.py
+│   ├── tumor_prediction.py
+│   └── tumor_prediction_candidate.py
+└── templates/
+    ├── index.html
+    └── output.html
+```
+
+The `src/` directory contains image-processing, visualization, training, and prediction-related modules. The `templates/` directory contains the HTML templates used by Flask. The `models/` directory documents the trained model requirements.
+
+## Required Input Files
+
+The application expects five NIfTI files associated with the same patient:
+
+| File suffix | Purpose |
+|---|---|
+| `_t1.nii.gz` | T1-weighted MRI |
+| `_t1ce.nii.gz` | T1 contrast-enhanced MRI |
+| `_t2.nii.gz` | T2-weighted MRI |
+| `_flair.nii.gz` | FLAIR MRI |
+| `_seg.nii.gz` | Segmentation mask |
+
+The combined upload limit is **200 MB**.
+
+Use only data authorized for processing. Do not publish identifiable patient information, private scans, or medical datasets without the necessary permission.
 
 ## Getting Started
 
-### Requirements
+### Prerequisites
 
-Before running the application, you need:
-
-- Python installed on your computer.
+- Python compatible with the project's declared dependencies.
+- Git, if cloning the repository.
 - The dependencies listed in `requirements.txt`.
-- A compatible trained CNN model for inference.
-- Authorized MRI test files in the required NIfTI format.
+- Suitable NIfTI input files for testing the workflow.
+- A compatible trained CNN model if model inference is required.
 
-The trained model and medical datasets are not included in this repository.
+The trained model and medical datasets are not included in the public repository.
 
-### 1. Open the Project
+### 1. Clone the Repository
 
-Open PowerShell in the project directory.
+```bash
+git clone https://github.com/abdulfadhil/brain-tumor-detection-system.git
+cd brain-tumor-detection-system
+```
 
 ### 2. Create a Virtual Environment
 
-Run these commands:
+On Windows, run:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
+```
+
+### 3. Install Dependencies
+
+```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-### 3. Add the Trained Model
+Use a Python version compatible with the declared dependencies. If installation fails, check Python and package compatibility before changing dependency versions.
+
+### 4. Configure the Trained Model
 
 The application expects the trained model at:
 
-`models/brain_tumor_cnn.h5`
+```text
+models/brain_tumor_cnn.h5
+```
 
-The model is excluded from the repository because of its size. Obtain the correct model separately and place it at the expected path before running inference.
+The model is excluded from the repository because of its size. A compatible model must be obtained separately and placed at the expected path before running inference.
 
-A different model may not work with the application's input shape or preprocessing steps.
+A different model may not work with the application's expected input shape or preprocessing steps. Refer to `models/README.md` for further information.
 
-### 4. Start the Application
+### 5. Start the Application
 
 Run:
 
@@ -125,40 +194,44 @@ Run:
 .\.venv\Scripts\python.exe app.py
 ```
 
-Open the following address in your browser:
+Open the following address in a browser:
 
-[http://127.0.0.1:5000](http://127.0.0.1:5000)
+http://127.0.0.1:5000
 
-The application runs locally on your computer. This address is not a public website.
+The application runs locally on the computer. This address is not a publicly hosted website.
 
-### 5. Try the Application
+### 6. Use the Application
 
-Select the folder containing the five required NIfTI files for one patient, then follow the upload workflow.
+1. Open the application in the browser.
+2. Select the five required NIfTI files for the same patient.
+3. Follow the upload and validation workflow.
+4. Review the available 3D visualization and experimental output.
 
-Only use data you are authorized to process. Do not use real patient scans simply to create a demonstration.
+Only use data authorized for processing. Successful upload or model execution does not establish diagnostic accuracy.
 
 ## Testing and Results
 
-The following checks have been completed in the local development environment:
+Basic software checks performed during development include Python syntax compilation and importing the Flask application. The application registered the following routes:
 
-- Python source files compile successfully.
-- The Flask application imports, and its basic routes respond as expected.
-- The saved model loads with an input shape of `(None, 64, 128, 128, 1)` and an output shape of `(None, 1)`.
-- A synthetic MRI volume passes the candidate preprocessing test.
-- Inference completes on a synthetic test volume.
+- `/`
+- `/upload`
+- `/static/<path:filename>`
 
-These checks confirm basic software behavior. They do not establish diagnostic accuracy or performance on real patient data. Results from synthetic inputs must not be interpreted as validated tumor predictions.
+These checks confirm basic application structure and import behavior. They do not establish that the trained model reliably detects tumors in real clinical scans.
+
+Model-loading, synthetic-inference, and diagnostic-performance claims should be included only when supported by reproducible test results. No clinical performance claim is made by this project.
 
 ## Current Limitations
 
-- The trained model and medical datasets are not included.
+- The trained model and medical datasets are not included in the public repository.
 - Inference requires a compatible model at `models/brain_tumor_cnn.h5`.
-- The original training pipeline and its equivalence to the current inference preprocessing have not been fully established.
-- The model output is experimental and is not a calibrated or clinically validated probability.
-- An intensity-based threshold is not a validated tumor segmentation.
-- Measurements depend on the supplied segmentation mask and should not be treated as clinical measurements.
+- The model's training pipeline and its consistency with inference preprocessing require further verification.
+- The model output is experimental and is not a calibrated probability.
+- The supplied segmentation mask is used for related measurements; the CNN does not generate that mask.
+- Measurements derived from the mask are not validated clinical measurements.
 - Successful installation or inference does not establish diagnostic accuracy.
-- The application has not been validated for clinical use.
+- The application has not been clinically validated.
+- The application runs locally and is not publicly hosted by default.
 
 ## Future Improvements
 
@@ -166,19 +239,16 @@ These checks confirm basic software behavior. They do not establish diagnostic a
 - Verify consistency between training and inference preprocessing.
 - Add reproducible tests using authorized sample data.
 - Improve input validation and error messages.
-- Record a short demonstration of the application.
-- Review third-party licenses and attributions before distributing additional demo assets.
+- Document the model architecture, training data, and preprocessing in greater detail.
+- Improve the visualization and user interface.
+- Review third-party licenses and attributions before distributing additional demonstration assets.
 
-## Who Is This Project For?
-
-This project is intended for students, developers, and researchers interested in Python, medical image processing, deep learning, and interactive visualization.
-
-It provides a practical way to explore how these technologies can be combined in a research prototype.
+These are potential improvements, not claims that the features have already been implemented.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is distributed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Disclaimer
+## Medical Disclaimer
 
-This project is for educational and research purposes only. It is not a medical device and must not be used to diagnose, treat, or make medical decisions about any condition. Always consult qualified healthcare professionals for medical advice.
+This project is provided for educational and research purposes only. It is not a medical device and has not been clinically validated. Its output must not be used to diagnose a condition, guide treatment, or replace advice from qualified healthcare professionals.
