@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -130,7 +130,7 @@
   </header>
 
   <section aria-labelledby="visual-title">
-    <h2 class="section-title" id="visual-title">🧠 3D MRI Visualization</h2>
+    <h2 class="section-title" id="visual-title">3D MRI Visualization</h2>
     <div class="panel">
       <div class="visualization">
         {{ graph_html | safe }}
@@ -143,7 +143,7 @@
   </section>
 
   <section aria-labelledby="report-title">
-    <h2 class="section-title" id="report-title">📊 Analysis Report</h2>
+    <h2 class="section-title" id="report-title">Analysis Report</h2>
     <div class="panel">
       <div class="notice">
         <strong>Important safety note</strong><br>
@@ -159,7 +159,7 @@
           <div class="metric-value">{{ tumor_results.get('Prediction', 'Not available') }}</div>
         </div>
         <div class="metric">
-          <div class="metric-label">CNN probability</div>
+          <div class="metric-label">Tumor probability (not validated)</div>
           <div class="metric-value">{{ tumor_results.get('Tumor Probability', 'Not reported') }}</div>
         </div>
         <div class="metric">
