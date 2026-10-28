@@ -58,3 +58,10 @@ Thumbs.db
 demos/brain-mri-3d-visualization.html
 # Local backup templates
 templates/output.backup.html
+
+# Local-only backups and audit reference files
+/backups/
+/supporting-files/
+
+# Local review backups; do not publish
+/temp-review-backup/

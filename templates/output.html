@@ -174,7 +174,7 @@
           <div class="metric-label">Most affected slice</div>
           <div class="metric-value">{{ tumor_results.get('Most Affected Slice', 'Not calculated') }}</div>
         </div>
-        {% if experimental_score is defined %}
+        {% if experimental_score is defined and experimental_score is not none %}
         <div class="metric">
           <div class="metric-label">Raw experimental CNN score (not calibrated)</div>
           <div class="metric-value">{{ experimental_score }}</div>
