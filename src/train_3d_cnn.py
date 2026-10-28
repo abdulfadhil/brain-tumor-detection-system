@@ -7,19 +7,19 @@ from tensorflow.keras.layers import Conv3D, MaxPooling3D, Flatten, Dense, Dropou
 from tensorflow.keras.optimizers import Adam
 from sklearn.model_selection import train_test_split
 
-# ✅ CHECK & CONFIGURE GPU USAGE
+# CHECK & CONFIGURE GPU USAGE
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
     try:
         for gpu in gpus:
             tf.config.experimental.set_memory_growth(gpu, True)
-        print("✅ GPU Memory Growth Enabled")
+        print("GPU memory growth enabled.")
     except RuntimeError as e:
-        print(f"❌ Error enabling memory growth: {e}")
+        print(f"Error enabling memory growth: {e}")
 
-print("🔍 Available GPUs:", tf.config.experimental.list_logical_devices('GPU'))
+print("Available GPUs:", tf.config.experimental.list_logical_devices('GPU'))
 
-# ✅ HYPERPARAMETERS
+# HYPERPARAMETERS
 IMAGE_SIZE = (128, 128)
 DEPTH = 64
 DATASET_PATH = os.environ.get("BRAIN_TUMOR_DATASET", "").strip()
@@ -27,7 +27,7 @@ EPOCHS = 10
 BATCH_SIZE = 2
 LEARNING_RATE = 0.001
 
-# ✅ FUNCTION TO LOAD MRI SCANS
+# FUNCTION TO LOAD MRI SCANS
 def load_mri_data(dataset_path, num_samples=400):
     images, labels = [], []
     patient_dirs = os.listdir(dataset_path)[:num_samples]
@@ -44,7 +44,7 @@ def load_mri_data(dataset_path, num_samples=400):
                     image = nib.load(t1_path).get_fdata()
                     label = nib.load(seg_path).get_fdata()
                 except Exception as e:
-                    print(f"❌ Error loading {t1_path}: {e}")
+                    print(f"Error loading {t1_path}: {e}")
                     continue
 
                 if image.shape[2] < DEPTH:
@@ -62,20 +62,20 @@ def load_mri_data(dataset_path, num_samples=400):
 
     return np.array(images), np.array(labels)
 
-# ✅ CHECK DATASET PATH
+# CHECK DATASET PATH
 if not DATASET_PATH or not os.path.isdir(DATASET_PATH):
     raise SystemExit(
         "Set BRAIN_TUMOR_DATASET to a valid MRI dataset directory."
     )
 
-# ✅ LOAD DATA
+# LOAD DATA
 X, y = load_mri_data(DATASET_PATH, num_samples=400)
 X = np.expand_dims(X, axis=-1)
 y = np.array(y).astype(np.float32)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# ✅ BUILD 3D CNN MODEL
+# BUILD 3D CNN MODEL
 def build_3d_cnn():
     model = Sequential([
         Conv3D(32, kernel_size=(3, 3, 3), activation='relu', input_shape=(DEPTH, IMAGE_SIZE[0], IMAGE_SIZE[1], 1)),
@@ -93,11 +93,11 @@ def build_3d_cnn():
     model.compile(optimizer=Adam(learning_rate=LEARNING_RATE), loss='binary_crossentropy', metrics=['accuracy'])
     return model
 
-# ✅ TRAIN MODEL ON GPU
+# TRAIN MODEL ON GPU
 with tf.device('/GPU:0'):
     model = build_3d_cnn()
     model.summary()
-    print("🚀 Training Model on GPU...")
+    print("Training model on GPU...")
     model.fit(X_train, y_train, epochs=EPOCHS, batch_size=BATCH_SIZE, validation_data=(X_test, y_test))
 
 # SAVE MODEL

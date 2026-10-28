@@ -6,10 +6,10 @@ import cv2
 
 from tensorflow.keras.models import load_model
 
-# ✅ Load Trained Model (Avoid Compilation Warning)
+# Load Trained Model (Avoid Compilation Warning)
 model = load_model("brain_tumor_cnn.h5", compile=False)
 
-# ✅ Define MRI Preprocessing Function
+# Define MRI Preprocessing Function
 def preprocess_mri(file_path, target_size=(128, 128), depth=64):
     try:
         # Load MRI scan
@@ -27,10 +27,10 @@ def preprocess_mri(file_path, target_size=(128, 128), depth=64):
         return np.expand_dims(resized_slices, axis=0), img  # Add batch dimension & return original scan
 
     except Exception as e:
-        print(f"❌ Error processing MRI: {e}")
+        print(f"Error processing MRI: {e}")
         return None, None
 
-# ✅ Function to Predict Tumor and Extract Size & Location
+# Function to Predict Tumor and Extract Size & Location
 def analyze_tumor(mri_path):
     image, original_scan = preprocess_mri(mri_path)
     if image is None:
@@ -40,12 +40,12 @@ def analyze_tumor(mri_path):
     prediction_prob = model.predict(image)[0][0]
     has_tumor = prediction_prob > 0.5
 
-    print(f"🔬 Tumor Probability: {prediction_prob:.4f}")
+    print(f"Tumor probability: {prediction_prob:.4f}")
 
     if not has_tumor:
-        return "🧠 No Tumor Detected!"
+        return "No Tumor Detected!"
 
-    # ✅ Tumor Detected - Extract Details
+    # Tumor Detected - Extract Details
     tumor_mask = original_scan > np.percentile(original_scan, 95)  # Adaptive thresholding
     tumor_voxels = np.sum(tumor_mask)  # Count tumor pixels
 
@@ -60,14 +60,14 @@ def analyze_tumor(mri_path):
     max_tumor_slice = np.argmax(slice_sums)  # Find slice with the most tumor pixels
 
     return {
-        "Prediction": "Tumor Detected ✅",
+        "Prediction": "Tumor Detected",
         "Tumor Probability": f"{prediction_prob:.4f}",
         "Tumor Size (Voxels)": tumor_voxels,
         "Approx. Tumor Size (mm³)": round(tumor_size_mm3, 2),
         "Most Affected Slice": max_tumor_slice
     }
 
-# ✅ Run Prediction (Example)
+# Run Prediction (Example)
 if __name__ == "__main__":
     import argparse
 
