@@ -11,10 +11,10 @@ from src.mri_3d_visualization import (
 )
 
 class MRIVisualizationTests(unittest.TestCase):
-    def create_patient(self, folder, constant=False):
+
+    def create_patient(self, folder, constant=False, shape=(16, 16, 16)):
         patient = folder.name
         affine = np.eye(4)
-        shape = (16, 16, 16)
 
         for modality in ("t1", "t1ce", "t2", "flair"):
             if constant:
@@ -108,10 +108,10 @@ class MRIVisualizationTests(unittest.TestCase):
         with TemporaryDirectory() as temp:
             folder = Path(temp) / "patient"
             folder.mkdir()
-            self.create_patient(folder)
+            self.create_patient(folder, shape=(40, 40, 40))
 
             mask_path = folder / "patient_seg.nii.gz"
-            mask = np.ones((16, 16, 16), dtype=np.float32)
+            mask = np.ones((40, 40, 40), dtype=np.float32)
             nib.save(
                 nib.Nifti1Image(mask, np.eye(4)), str(mask_path)
             )
@@ -133,7 +133,6 @@ class MRIVisualizationTests(unittest.TestCase):
 
             with self.assertRaisesRegex(ValueError, "invalid voxel values"):
                 generate_3d_plot(folder)
-
 
 if __name__ == "__main__":
     unittest.main()

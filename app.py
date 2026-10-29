@@ -30,10 +30,11 @@ def get_model():
     return _model
 
 
+
 def identify_upload(filename):
     normalized = filename.replace("\\", "/")
-    parts = normalized.split("/")
-    basename = secure_filename(parts[-1])
+    basename = secure_filename(normalized.split("/")[-1])
+
     match = re.fullmatch(
         r"(.+?)_(t1ce|flair|t1|t2|seg)\.nii(?:\.gz)?",
         basename,
@@ -44,11 +45,12 @@ def identify_upload(filename):
 
     patient = match.group(1)
     modality = match.group(2).lower()
-    if len(parts) > 1 and parts[-2]:
-        patient = secure_filename(parts[-2])
+
     if not patient:
         return None
+
     return patient, modality
+
 
 
 def preprocess_t1(path):

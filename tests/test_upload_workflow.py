@@ -50,6 +50,24 @@ class UploadWorkflowTests(unittest.TestCase):
             application.identify_upload("Patient_001_t1ce.nii.gz"), expected
         )
 
+    def test_identifies_windows_browser_fakepath(self):
+        expected = ("Patient_001", "t1")
+        self.assertEqual(
+            application.identify_upload(
+                r"C:\fakepath\Patient_001_t1.nii.gz"
+            ),
+            expected,
+        )
+
+    def test_identifies_forward_slash_path(self):
+        expected = ("Patient_001", "t1")
+        self.assertEqual(
+            application.identify_upload(
+                "C:/fakepath/Patient_001_t1.nii.gz"
+            ),
+            expected,
+        )
+
     def test_rejects_unrecognized_filename(self):
         self.assertIsNone(application.identify_upload("notes.txt"))
 
