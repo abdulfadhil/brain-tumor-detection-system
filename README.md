@@ -9,7 +9,7 @@ The project combines medical-image validation, interactive visualization, and ex
 This project is associated with a research paper published in the *International Research Journal on Advanced Engineering Hub (IRJAEH)*, Vol. 3, Issue 04, April 2025, pp. 1818-1827.
 
 - **Published Paper:** [Implementation of 3D CNN-Based Brain Tumor Detection](https://irjaeh.com/index.php/journal/article/view/763)
-- **DOI:** [10.47392/IRJAEH.2025.0263](https://doi.org/10.47392/IRJAEH.2025.0263)
+- **DOI:** `10.47392/IRJAEH.2025.0263`
 
 ## About the Project
 
