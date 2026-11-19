@@ -1,6 +1,6 @@
 ﻿# Source Code Guide
 
-This directory contains the Python modules used by the Brain MRI Analysis project, along with separate training and prediction experiments.
+This directory contains the Python modules used by the Brain Tumor Detection project, along with separate training and prediction experiments.
 
 ## Main Application Modules
 
