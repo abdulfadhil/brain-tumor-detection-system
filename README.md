@@ -4,6 +4,13 @@ An academic project developed in April 2025 to explore brain MRI processing, int
 
 The project combines medical-image validation, interactive visualization, and experimental model inference in a local Flask web application.
 
+## Publication
+
+The research work was published in the *International Research Journal on Advanced Engineering Hub (IRJAEH)*, Vol. 3, Issue 04, April 2025, pp. 1818-1827.
+
+- **Published paper:** [Implementation of 3D CNN-Based Brain Tumor Detection](https://irjaeh.com/index.php/journal/article/view/763)
+- **DOI:** [10.47392/IRJAEH.2025.0263](https://doi.org/10.47392/IRJAEH.2025.0263)
+
 ## About the Project
 
 Working with 3D MRI data involves reading medical-image files, preparing volumetric data, checking input consistency, and presenting the results clearly.
